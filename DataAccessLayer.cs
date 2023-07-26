@@ -18,7 +18,10 @@ public class DataAccessLayer
     SqlConnection con = new SqlConnection();
     public DataAccessLayer()
     {
-        con.ConnectionString = @"Data Source = (localdb)\MSSQLLocalDB;AttachDbFilename = D:\Source\Repos\JobConsultancyRepo\JobConsultancy\App_Data\ConsultancyData.mdf;Integrated Security = True";      
+       string relativePath = ConfigurationManager.AppSettings["filePath"];        
+       relativePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, relativePath);        
+       string conString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=" + relativePath + ";Integrated Security=True";        
+       con.ConnectionString = conString;
     }
     
     //insert method for tbl_Candidate
